@@ -1,10 +1,8 @@
 package Controller;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 public class Server extends Thread {
@@ -67,8 +65,15 @@ public class Server extends Thread {
 			try {
 				while (true) {
 					String line = reader.readLine();
+					if (line == null) {
+						break;
+					}
 					System.out.println(" " + socket.getInetAddress().getHostAddress() + ": Received: " + line + ".");
-					writer.writeBytes(line);
+					if (line.equals("S")) {
+						writer.writeBytes("Svar...");
+					} else {
+						writer.writeBytes("Error.");
+					}
 				}
 			} catch (IOException e) {
 			}

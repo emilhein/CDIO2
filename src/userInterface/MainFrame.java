@@ -17,6 +17,8 @@ import java.awt.Window.Type;
 import java.awt.Button;
 import javax.swing.SwingConstants;
 import javax.swing.JTextArea;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MainFrame extends JFrame {
 
@@ -61,7 +63,7 @@ public class MainFrame extends JFrame {
 			}
 		});
 		
-		JButton button_1 = new JButton("3");
+		JButton Button_3 = new JButton("3");
 		
 		JButton button_10 = new JButton("->0<-");
 		
@@ -69,27 +71,39 @@ public class MainFrame extends JFrame {
 		
 		JButton btnO = new JButton("8=>");
 		
-		JButton button = new JButton("2");
+		JButton Button_2 = new JButton("2");
+		Button_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				textField.setText(textField.getText() + " Jeg skriver lidt mere");
+			}
+		});
 		
-		JButton button_2 = new JButton("1");
+		JButton Button_1 = new JButton("1");
+		Button_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				textField.setText("Hej med dig!!");
+			}
+		});
 		
-		JButton button_3 = new JButton("4");
+		JButton Button_4 = new JButton("4");
 		
-		JButton button_4 = new JButton("5");
+		JButton Button_5 = new JButton("5");
 		
-		JButton button_5 = new JButton("6");
+		JButton Button_6 = new JButton("6");
 		
-		JButton button_6 = new JButton("9");
+		JButton Button_9 = new JButton("9");
 		
-		JButton button_7 = new JButton("8");
+		JButton Button_8 = new JButton("8");
 		
-		JButton button_8 = new JButton("7");
+		JButton Button_7 = new JButton("7");
 		
-		JButton button_9 = new JButton(".");
+		JButton Button_dot = new JButton(".");
 		
-		JButton button_11 = new JButton("0");
+		JButton Button_0 = new JButton("0");
 		
-		JButton btnC = new JButton("C");
+		JButton Button_C = new JButton("C");
 		
 		JTextArea textArea = new JTextArea();
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
@@ -115,30 +129,30 @@ public class MainFrame extends JFrame {
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 									.addGroup(gl_contentPane.createSequentialGroup()
-										.addComponent(button_3, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
+										.addComponent(Button_4, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(button_4, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
+										.addComponent(Button_5, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(button_5, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE))
+										.addComponent(Button_6, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE))
 									.addGroup(gl_contentPane.createSequentialGroup()
-										.addComponent(button_2, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
+										.addComponent(Button_1, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(button, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
+										.addComponent(Button_2, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)))
+										.addComponent(Button_3, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)))
 								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 									.addGroup(gl_contentPane.createSequentialGroup()
-										.addComponent(button_9, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
+										.addComponent(Button_dot, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(button_11, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
+										.addComponent(Button_0, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(btnC, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE))
+										.addComponent(Button_C, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE))
 									.addGroup(gl_contentPane.createSequentialGroup()
-										.addComponent(button_8, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
+										.addComponent(Button_7, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(button_7, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
+										.addComponent(Button_8, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(button_6, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE))))))
+										.addComponent(Button_9, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE))))))
 					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
@@ -148,24 +162,24 @@ public class MainFrame extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(button_1)
-								.addComponent(button)
-								.addComponent(button_2))
+								.addComponent(Button_3)
+								.addComponent(Button_2)
+								.addComponent(Button_1))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(button_3)
-								.addComponent(button_4)
-								.addComponent(button_5))
+								.addComponent(Button_4)
+								.addComponent(Button_5)
+								.addComponent(Button_6))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(button_6)
-								.addComponent(button_7)
-								.addComponent(button_8))
+								.addComponent(Button_9)
+								.addComponent(Button_8)
+								.addComponent(Button_7))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(button_9)
-								.addComponent(button_11)
-								.addComponent(btnC)))
+								.addComponent(Button_dot)
+								.addComponent(Button_0)
+								.addComponent(Button_C)))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)

@@ -1,5 +1,6 @@
 import java.io.IOException;
-import Controller.Server;
+import userInterface.MainWindow;
+import controller.Server;
 public class Main {
 
 	public static void main(String[] args) {
@@ -15,7 +16,7 @@ public class Main {
 		try {
 			new Server(port);
 			System.out.println(" Started server on port " + port + ".");
-			// Start vægt "GUI"
+			new MainWindow().show();
 		} catch (IOException e) {
 			System.out.println(" Cannot start server on port " + port + ".");
 		}

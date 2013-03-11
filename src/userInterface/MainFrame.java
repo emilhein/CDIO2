@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Window.Type;
 import java.awt.Button;
 import javax.swing.SwingConstants;
+import javax.swing.JTextArea;
 
 public class MainFrame extends JFrame {
 
@@ -89,6 +90,8 @@ public class MainFrame extends JFrame {
 		JButton button_11 = new JButton("0");
 		
 		JButton btnC = new JButton("C");
+		
+		JTextArea textArea = new JTextArea();
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
@@ -105,10 +108,12 @@ public class MainFrame extends JFrame {
 							.addComponent(btnO))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(textField, GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
-							.addGap(35)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(Alignment.TRAILING, gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(textArea, GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
+								.addComponent(textField, GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE))
+							.addGap(35)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 									.addGroup(gl_contentPane.createSequentialGroup()
 										.addComponent(button_3, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(ComponentPlacement.RELATED)
@@ -121,7 +126,7 @@ public class MainFrame extends JFrame {
 										.addComponent(button, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(ComponentPlacement.RELATED)
 										.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)))
-								.addGroup(Alignment.TRAILING, gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 									.addGroup(gl_contentPane.createSequentialGroup()
 										.addComponent(button_9, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(ComponentPlacement.RELATED)
@@ -140,7 +145,7 @@ public class MainFrame extends JFrame {
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 								.addComponent(button_1)
@@ -155,13 +160,16 @@ public class MainFrame extends JFrame {
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 								.addComponent(button_6)
 								.addComponent(button_7)
-								.addComponent(button_8)))
-						.addComponent(textField))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(button_9)
-						.addComponent(button_11)
-						.addComponent(btnC))
+								.addComponent(button_8))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(button_9)
+								.addComponent(button_11)
+								.addComponent(btnC)))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(textArea, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)))
 					.addPreferredGap(ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnTare)

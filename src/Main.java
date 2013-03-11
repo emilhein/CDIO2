@@ -1,6 +1,6 @@
 import java.io.IOException;
 import userInterface.MainWindow;
-import controller.Server;
+import Controller.Server;
 public class Main {
 
 	public static void main(String[] args) {

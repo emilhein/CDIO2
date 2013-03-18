@@ -14,9 +14,9 @@ public class Main {
 			}
 		}
 		try {
-			Server server =new Server(port);
+			new Server(port);
 			System.out.println(" Started server on port " + port + ".");
-			new MainWindow().show();
+			new MainWindow();
 		} catch (IOException e) {
 			System.out.println(" Cannot start server on port " + port + ".");
 		}

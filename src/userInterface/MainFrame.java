@@ -62,11 +62,11 @@ public class MainFrame extends JFrame {
 		
 		JButton Button_3 = new JButton("3");
 		
-		JButton button_10 = new JButton("->0<-");
+		JButton button_10 = new JButton("→ 0 ←");
 		
 		JButton btnOnoff = new JButton("On/Off");
 		
-		JButton btnO = new JButton("8=>");
+		JButton btnO = new JButton("☐→");
 		
 		JButton Button_2 = new JButton("2");
 		Button_2.addMouseListener(new MouseAdapter() {

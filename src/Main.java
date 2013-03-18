@@ -1,5 +1,5 @@
 import java.io.IOException;
-import userInterface.MainWindow;
+import userInterface.MainFrame;
 import controller.Server;
 public class Main {
 
@@ -16,7 +16,7 @@ public class Main {
 		try {
 			new Server(port);
 			System.out.println(" Started server on port " + port + ".");
-			new MainWindow();
+			new MainFrame().setVisible(true);;
 		} catch (IOException e) {
 			System.out.println(" Cannot start server on port " + port + ".");
 		}

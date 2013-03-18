@@ -10,16 +10,18 @@ public class Main {
 			try {
 				port = Integer.parseInt(args[0]);
 			} catch (Exception e) {
-				System.out.println(" Invalid port number: " + port + ".");
+				System.out.println(" Invalid port number " + port + ".");
+				return;
 			}
 		}
 		try {
 			new Server(port);
-			System.out.println(" Started server on port " + port + ".");
-			new MainFrame().setVisible(true);;
 		} catch (IOException e) {
 			System.out.println(" Cannot start server on port " + port + ".");
+			return;
 		}
+		System.out.println(" Started server on port " + port + ".");
+		new MainFrame().setVisible(true);
 	}
 
 }

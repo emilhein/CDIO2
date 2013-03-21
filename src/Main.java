@@ -1,4 +1,3 @@
-import java.io.IOException;
 import userInterface.MainFrame;
 import controller.Server;
 public class Main {
@@ -17,7 +16,7 @@ public class Main {
 		MainFrame window = new MainFrame();
 		try {
 			new Server(port, window);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			System.out.println(" Cannot start server on port " + port + ".");
 			return;
 		}

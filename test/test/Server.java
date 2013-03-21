@@ -57,7 +57,7 @@ public class Server {
 			// Initialize server
 			MainFrame window = new MainFrame();
 			controller.Server server = new controller.Server(5576, window);
-
+			
 			// Initialize client
 			Socket client = new Socket("localhost", 5576);
 			DataOutputStream clientOut = new DataOutputStream(client.getOutputStream());
@@ -65,10 +65,15 @@ public class Server {
 			
 			// Command: S
 			clientOut.writeBytes("S");
-			if (!clientIn.readLine().equals("S S 0 kg")) {
+			if (!clientIn.readLine().equals("S S 0.0 kg")) {
 				fail("Failed.");
 			}
-
+			window.setNetto(75.45);
+			clientOut.writeBytes("S");
+			if (!clientIn.readLine().equals("S S 75.45 kg")) {
+				fail("Failed.");
+			}
+			
 			// Cleanup
 			server.close();
 			client.close();

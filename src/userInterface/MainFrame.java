@@ -1,11 +1,8 @@
 package userInterface;
-
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
@@ -16,32 +13,15 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-
 public class MainFrame extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MainFrame frame = new MainFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public MainFrame() {
+	
+	private double brutto = 0;
+	private double tara = 0;
+	
+ 	public MainFrame() {
 		setTitle("MainFrame");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 445, 212);
@@ -190,4 +170,33 @@ public class MainFrame extends JFrame {
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
+	
+	public double getBrutto() {
+		return brutto;
+	}
+	public void setBrutto(double brutto) {
+		this.brutto = brutto;
+	}
+	public double getNetto() {
+		return brutto - tara;
+	}
+	public void setNetto(double netto) {
+		this.brutto = netto + tara;
+	}
+	public double getTara() {
+		return tara;
+	}
+	public void setTara(double tara) {
+		this.tara = tara;
+	}
+	public void display(String message) {
+		//# TODO: Vis meddelse på displayet.
+	}
+	public void clearDisplay() {
+		//# TODO: Fjern meddelsen fra displayet og vend tilbage til visning af netto vægt.
+	}
+	public String prompt(String firstMessage, String secondMessage, String thirdMessage) {
+		return ""; //# TODO: Vis tre meddelser på displayet og retuner den indtastede værdi.
+	}
+	
 }

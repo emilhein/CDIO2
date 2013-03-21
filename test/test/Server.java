@@ -1,50 +1,84 @@
 package test;
 import static org.junit.Assert.*;
-import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStreamReader;
+import java.net.Socket;
 import org.junit.Test;
+import userInterface.MainFrame;
 public class Server {
 
 	@Test
-	public void newServer() {
+	public void initialization() {
 		controller.Server server = null;
+		MainFrame window = new MainFrame();
 		
-		// For lav
+		// Port
 		try {
-			new controller.Server(-1).close();
+			new controller.Server(-1, window).close(); // For lav
 			fail("Failed.");
-		} catch (IOException e) {
-			fail("Failed.");
-		} catch (IllegalArgumentException e) {
+		} catch (Exception e) {
 		}
-		
-		// Laveste
 		try {
-			new controller.Server(0).close();
-		} catch (IOException e) {
-			fail("Failed.");
-		}
-		
-		// Højeste + Allerede i brug
-		try {
-			server = new controller.Server(65535);
-		} catch (IOException e) {
+			new controller.Server(0, window).close(); // Laveste
+		} catch (Exception e) {
 			fail("Failed.");
 		}
 		try {
-			new controller.Server(65535).close();
+			server = new controller.Server(65535, window); // Højeste
+		} catch (Exception e) {
 			fail("Failed.");
-		} catch (IOException e) {
+		}
+		try {
+			new controller.Server(65535, window).close(); // Allerede i brug
+			fail("Failed.");
+		} catch (Exception e) {
 		}
 		server.close();
-		
-		// For høj
 		try {
-			new controller.Server(65536).close();
-		} catch (IOException e) {
+			new controller.Server(65536, window).close(); // For høj
+		} catch (Exception e) {
+		}
+		
+		// Window
+		try {
+			new controller.Server(0, null).close(); // Null
 			fail("Failed.");
-		} catch (IllegalArgumentException e) {
+		} catch (Exception e) {
 		}
 		
 	}
 
+	@Test
+	public void communication() {
+		
+		try {
+		
+			// Initialize server
+			MainFrame window = new MainFrame();
+			controller.Server server = new controller.Server(5576, window);
+
+			// Initialize client
+			Socket client = new Socket("localhost", 5576);
+			DataOutputStream clientOut = new DataOutputStream(client.getOutputStream());
+			BufferedReader clientIn = new BufferedReader(new InputStreamReader(client.getInputStream()));
+			
+			// Command: S
+			clientOut.writeBytes("S");
+			if (!clientIn.readLine().equals("S S 0 kg")) {
+				fail("Failed.");
+			}
+
+			// Cleanup
+			server.close();
+			client.close();
+			clientOut.close();
+			clientIn.close();
+			
+		} catch (Exception e) {
+			fail("Failed: " + e.getMessage());
+		}
+		
+	}
+	
 }

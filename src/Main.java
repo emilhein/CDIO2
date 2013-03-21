@@ -14,14 +14,15 @@ public class Main {
 				return;
 			}
 		}
+		MainFrame window = new MainFrame();
 		try {
-			new Server(port);
+			new Server(port, window);
 		} catch (IOException e) {
 			System.out.println(" Cannot start server on port " + port + ".");
 			return;
 		}
 		System.out.println(" Started server on port " + port + ".");
-		new MainFrame().setVisible(true);
+		window.setVisible(true);
 	}
 
 }

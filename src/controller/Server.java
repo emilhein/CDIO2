@@ -7,14 +7,20 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import userInterface.MainFrame;
 public class Server extends Thread {
 	
 	ServerSocket listener;
+	MainFrame window;
 	
 	//# New
 	
-	public Server(int port) throws IOException {
+	public Server(int port, MainFrame window) throws IOException {
+		if (window == null) {
+			throw new IllegalArgumentException("Window is undefined.");
+		}
 		listener = new ServerSocket(port);
+		this.window = window;
 		start();
 	}
 	
@@ -33,7 +39,7 @@ public class Server extends Thread {
 	public void run() {
 		try {
 			while (true) {
-				new Client(listener.accept());
+				new Client(listener.accept(), window);
 			}
 		} catch (IOException e) {
 		}
@@ -46,12 +52,14 @@ public class Server extends Thread {
 		Socket socket;
 		BufferedReader reader;
 		DataOutputStream writer;
+		MainFrame window;
 		
 		//# New
 		
-		public Client(Socket socket) {
+		public Client(Socket socket, MainFrame window) {
 			System.out.println(" " + socket.getInetAddress().getHostAddress() + ": Connected.");
 			this.socket = socket;
+			this.window = window;
 			try {
 				reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 				writer = new DataOutputStream(socket.getOutputStream());
@@ -76,37 +84,37 @@ public class Server extends Thread {
 					if (line.equals("S")) {
 					
 						// Retuner netto vægt.
-						writer.writeBytes("S S " + " kg"); //# TODO: Indsæt netto vægt ved +, bruger . som decimal tegn.
+						writer.writeBytes("S S " + ("" + window.getNetto()).replace(",", ".") + " kg");
 
 					} else if (line.equals("T")) {
 					
 						// Sæt og retuner tara.
-						writer.writeBytes("T S " + " kg"); //# TODO: Indsæt ny tara vægt ved +, bruger . som decimal tegn.
+						double newTara = window.getBrutto();
+						window.setTara(newTara);
+						writer.writeBytes("T S " + ("" + newTara).replace(",", ".") + " kg");
 
 					} else if (line.equals("DW")) {
 					
 						// Fjern meddelsen fra displayet og vend tilbage til visning af netto vægt.
-						//# TODO: Fjern meddelse fra displayet.
+						window.clearDisplay();
 						writer.writeBytes("DW A");
 					
 					} else if (line.startsWith("D ") && line.length() > 2) {
 						
 						// Vis meddelse på displayet.
-						line.substring(2); //# TODO: Vis denne meddelse på displayet.
+						window.display(line.substring(2));
 						writer.writeBytes("D A");
 
 					} else if (matcherRM20.matches()) {
 
 						// Vis tre meddelser på displayet og retuner den indtastede værdi.
-						matcherRM20.group(1); //# TODO: Vis denne meddelse som den første på displayet.
-						matcherRM20.group(2); //# TODO: Vis denne meddelse som den anden på displayet.
-						matcherRM20.group(3); //# TODO: Vis denne meddelse som den tredje på displayet.
-						writer.writeBytes("RM20 A \"" + "\""); //# TODO: Retuner svar. Skal A være et B?
+						writer.writeBytes("RM20 B");
+						writer.writeBytes("RM20 A \"" + window.prompt(matcherRM20.group(1), matcherRM20.group(2), matcherRM20.group(3)).replace("\"", "_") + "\"");
 						
 					} else {
 						
 						// Retuner en fejlmeddelse.
-						writer.writeBytes("Error."); //# TODO: Send rigtig fejlkode.
+						writer.writeBytes("Error"); //# TODO: Send rigtig fejlkode.
 					
 					}
 				}

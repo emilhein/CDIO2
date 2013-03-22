@@ -1,4 +1,4 @@
-import userInterface.MainFrame;
+import userInterface.MainWindow;
 import controller.Server;
 public class Main {
 
@@ -13,15 +13,15 @@ public class Main {
 				return;
 			}
 		}
-		MainFrame window = new MainFrame();
+		MainWindow window = new MainWindow();
 		try {
-			new Server(port, window);//port er porten serveren kører å, window er serverens egen gui.
+			new Server(port, window);//port er porten serveren kï¿½rer ï¿½, window er serverens egen gui.
 		} catch (Exception e) {
 			System.out.println(" Cannot start server on port " + port + ".");
 			return;
 		}
 		System.out.println(" Started server on port " + port + ".");
-		window.setVisible(true); //Goer window synlig.
+		window.show(); //Goer window synlig.
 	}
 
 }

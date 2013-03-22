@@ -7,15 +7,15 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import userInterface.MainFrame;
+import userInterface.MainWindow;
 public class Server extends Thread {
 	
 	ServerSocket listener;
-	MainFrame window;
+	MainWindow window;
 	
 	//# New
 	
-	public Server(int port, MainFrame window) throws IOException {
+	public Server(int port, MainWindow window) throws IOException {
 		if (window == null) {//Tjekker om window exsisterer.
 			throw new IllegalArgumentException("Window is undefined.");
 		}
@@ -52,11 +52,11 @@ public class Server extends Thread {
 		Socket socket;
 		BufferedReader reader;
 		DataOutputStream writer;
-		MainFrame window;
+		MainWindow window;
 		
 		//# New
 		
-		public Client(Socket socket, MainFrame window) {
+		public Client(Socket socket, MainWindow window) {
 			System.out.println(" " + socket.getInetAddress().getHostAddress() + ": Connected.");
 			this.socket = socket;
 			this.window = window;

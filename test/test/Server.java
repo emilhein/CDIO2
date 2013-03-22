@@ -5,13 +5,13 @@ import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import org.junit.Test;
-import userInterface.MainFrame;
+import userInterface.MainWindow;
 public class Server {
 
 	@Test
 	public void initialization() {
 		controller.Server server = null;
-		MainFrame window = new MainFrame();
+		MainWindow window = new MainWindow();
 		
 		// Port
 		try {
@@ -56,7 +56,7 @@ public class Server {
 		try {
 		
 			// Initialize server
-			MainFrame window = new MainFrame();
+			MainWindow window = new MainWindow();
 			controller.Server server = new controller.Server(5577, window);
 			
 			// Initialize client

@@ -47,32 +47,13 @@ public class MainWindow {
 	private JTextField bruttoField;
 	private JTextField upperTextField;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MainWindow window = new MainWindow();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private double brutto = 0;
+	private double tara = 0;
 
-	/**
-	 * Create the application.
-	 */
 	public MainWindow() {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 445, 243);
@@ -378,4 +359,38 @@ public class MainWindow {
 		panel.add(btnEnter, gbc_btnEnter);
 		frame.getContentPane().setLayout(groupLayout);
 	}
+
+	public void show() {
+		MainWindow window = new MainWindow();
+		window.frame.setVisible(true);
+	}
+	
+	public double getBrutto() {
+		return brutto;
+	}
+	public void setBrutto(double brutto) {
+		this.brutto = brutto;
+	}
+	public double getNetto() {
+		return brutto - tara;
+	}
+	public void setNetto(double netto) {
+		this.brutto = netto + tara;
+	}
+	public double getTara() {
+		return tara;
+	}
+	public void setTara(double tara) {
+		this.tara = tara;
+	}
+	public void display(String message) {
+		//# TODO: Vis meddelse på displayet.
+	}
+	public void clearDisplay() {
+		//# TODO: Fjern meddelsen fra displayet og vend tilbage til visning af netto vægt.
+	}
+	public String prompt(String firstMessage, String secondMessage, String thirdMessage) {
+		return ""; //# TODO: Vis tre meddelser på displayet og retuner den indtastede værdi.
+	}
+	
 }

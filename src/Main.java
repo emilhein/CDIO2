@@ -15,13 +15,13 @@ public class Main {
 		}
 		MainFrame window = new MainFrame();
 		try {
-			new Server(port, window);
+			new Server(port, window);//port er porten serveren kører å, window er serverens egen gui.
 		} catch (Exception e) {
 			System.out.println(" Cannot start server on port " + port + ".");
 			return;
 		}
 		System.out.println(" Started server on port " + port + ".");
-		window.setVisible(true);
+		window.setVisible(true); //Goer window synlig.
 	}
 
 }

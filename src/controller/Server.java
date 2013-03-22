@@ -16,10 +16,10 @@ public class Server extends Thread {
 	//# New
 	
 	public Server(int port, MainFrame window) throws IOException {
-		if (window == null) {
+		if (window == null) {//Tjekker om window exsisterer.
 			throw new IllegalArgumentException("Window is undefined.");
 		}
-		listener = new ServerSocket(port);
+		listener = new ServerSocket(port);//Hvor den lytter.
 		this.window = window;
 		start();
 	}
@@ -72,7 +72,7 @@ public class Server extends Thread {
 		
 		@Override
 		public void run() {
-			Pattern patternRM20 = Pattern.compile("^RM20 8 \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$");
+			Pattern patternRM20 = Pattern.compile("^RM20 8 \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$"); //Moenster
 			try {
 				while (true) {
 					String line = reader.readLine();
@@ -84,37 +84,37 @@ public class Server extends Thread {
 					if (line.equals("S")) {
 					
 						// Retuner netto vægt.
-						writer.writeBytes("S S " + ("" + window.getNetto()).replace(",", ".") + " kg");
+						writer.writeBytes("S S " + ("" + window.getNetto()).replace(",", ".") + " kg\r\n");
 
 					} else if (line.equals("T")) {
 					
-						// Sæt og retuner tara.
+						// Saet og retuner tara(tara bliver sat til nuvaerende brutto).
 						double newTara = window.getBrutto();
 						window.setTara(newTara);
-						writer.writeBytes("T S " + ("" + newTara).replace(",", ".") + " kg");
+						writer.writeBytes("T S " + ("" + newTara).replace(",", ".") + " kg\r\n");
 
 					} else if (line.equals("DW")) {
 					
 						// Fjern meddelsen fra displayet og vend tilbage til visning af netto vægt.
 						window.clearDisplay();
-						writer.writeBytes("DW A");
+						writer.writeBytes("DW A\r\n");
 					
 					} else if (line.startsWith("D ") && line.length() > 2) {
 						
-						// Vis meddelse på displayet.
+						// Vis meddelse på displayet(paa vaegten).
 						window.display(line.substring(2));
-						writer.writeBytes("D A");
+						writer.writeBytes("D A\r\n");
 
 					} else if (matcherRM20.matches()) {
 
 						// Vis tre meddelser på displayet og retuner den indtastede værdi.
-						writer.writeBytes("RM20 B");
-						writer.writeBytes("RM20 A \"" + window.prompt(matcherRM20.group(1), matcherRM20.group(2), matcherRM20.group(3)).replace("\"", "_") + "\"");
+						writer.writeBytes("RM20 B\r\n");
+						writer.writeBytes("RM20 A \"" + window.prompt(matcherRM20.group(1), matcherRM20.group(2), matcherRM20.group(3)).replace("\"", "_") + "\"\r\n");
 						
 					} else {
 						
 						// Retuner en fejlmeddelse.
-						writer.writeBytes("Error"); //# TODO: Send rigtig fejlkode.
+						writer.writeBytes("Error\r\n"); //# TODO: Send rigtig fejlkode.
 					
 					}
 				}

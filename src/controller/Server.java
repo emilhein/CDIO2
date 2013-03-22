@@ -16,10 +16,10 @@ public class Server extends Thread {
 	//# New
 	
 	public Server(int port, MainFrame window) throws IOException {
-		if (window == null) {
+		if (window == null) {//Tjekker om window exsisterer.
 			throw new IllegalArgumentException("Window is undefined.");
 		}
-		listener = new ServerSocket(port);
+		listener = new ServerSocket(port);//Hvor den lytter.
 		this.window = window;
 		start();
 	}
@@ -72,7 +72,7 @@ public class Server extends Thread {
 		
 		@Override
 		public void run() {
-			Pattern patternRM20 = Pattern.compile("^RM20 8 \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$");
+			Pattern patternRM20 = Pattern.compile("^RM20 8 \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$"); //Moenster
 			try {
 				while (true) {
 					String line = reader.readLine();
@@ -88,7 +88,7 @@ public class Server extends Thread {
 
 					} else if (line.equals("T")) {
 					
-						// Sæt og retuner tara.
+						// Saet og retuner tara(tara bliver sat til nuvaerende brutto).
 						double newTara = window.getBrutto();
 						window.setTara(newTara);
 						writer.writeBytes("T S " + ("" + newTara).replace(",", ".") + " kg");
@@ -101,7 +101,7 @@ public class Server extends Thread {
 					
 					} else if (line.startsWith("D ") && line.length() > 2) {
 						
-						// Vis meddelse på displayet.
+						// Vis meddelse på displayet(paa vaegten).
 						window.display(line.substring(2));
 						writer.writeBytes("D A");
 

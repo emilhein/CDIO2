@@ -39,6 +39,8 @@ import java.math.BigDecimal;
 
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MainWindow {
 
@@ -47,8 +49,10 @@ public class MainWindow {
 	private JTextField bruttoField;
 	private JTextField upperTextField;
 
-	private double brutto = 0.000;
 	private double tara = 0;
+	private double netto = 0.000;
+	private double brutto = tara + netto;
+	
 
 	public MainWindow() {
 		initialize();
@@ -61,7 +65,15 @@ public class MainWindow {
 		
 		JPanel panel = new JPanel();
 		
-		JButton btnTare = new JButton("Tare");
+		JButton btnTare = new JButton("Tara");
+		btnTare.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				setTara(getBrutto());
+				setNetto(0);
+				upperTextField.setText(getNetto() + " Kg");
+			}
+		});
 		
 		// this field does not show the "real" weight on the physical weight
 		bruttoField = new JTextField();
@@ -69,15 +81,20 @@ public class MainWindow {
 		bruttoField.setForeground(new Color(0, 0, 0));
 		bruttoField.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		bruttoField.setEditable(false);
-		bruttoField.setText("" + brutto);
+		bruttoField.setText("" + getBrutto());
 		bruttoField.setColumns(10);
 		
 		JButton BruttoUp = new JButton("");
+		BruttoUp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		BruttoUp.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {				
-				brutto = brutto + 1;
-				bruttoField.setText("" + brutto);
+				setNetto(getNetto() +1);
+				bruttoField.setText("" + getBrutto());
+				upperTextField.setText(getNetto() + " Kg");
 			}
 		});
 		BruttoUp.setIcon(new ImageIcon(MainWindow.class.getResource("/javax/swing/plaf/metal/icons/sortUp.png")));
@@ -87,8 +104,9 @@ public class MainWindow {
 		BruttoDown.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				brutto = brutto - 1;
-				bruttoField.setText("" + brutto);
+				setNetto(getNetto() -1);
+				bruttoField.setText("" + getBrutto());
+				upperTextField.setText(getNetto() + " Kg");
 			}
 		});
 		BruttoDown.setIcon(new ImageIcon(MainWindow.class.getResource("/javax/swing/plaf/metal/icons/sortDown.png")));
@@ -149,6 +167,8 @@ public class MainWindow {
 		
 		// has to follow the (bruttolast) field
 		upperTextField = new JTextField();
+		upperTextField.setEditable(false);
+		upperTextField.setText(netto + " Kg");
 		upperTextField.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_upperTextField = new GridBagConstraints();
 		gbc_upperTextField.gridwidth = 2;
@@ -161,6 +181,7 @@ public class MainWindow {
 		upperTextField.setColumns(10);
 		
 		leftTextField = new JTextField();
+		leftTextField.setEditable(false);
 		GridBagConstraints gbc_leftTextField = new GridBagConstraints();
 		gbc_leftTextField.fill = GridBagConstraints.BOTH;
 		gbc_leftTextField.insets = new Insets(0, 0, 0, 5);
@@ -189,136 +210,136 @@ public class MainWindow {
 // buttons begin
 // ===========================
 		
-		JButton btnNewButton = new JButton("1");
-		btnNewButton.addMouseListener(new MouseAdapter() {
+		JButton numButton1 = new JButton("1");
+		numButton1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent arg0) {
 				rightTextField.setText(rightTextField.getText() + "1");
 			}
 		});
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.anchor = GridBagConstraints.NORTH;
-		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton.gridx = 0;
-		gbc_btnNewButton.gridy = 0;
-		panel.add(btnNewButton, gbc_btnNewButton);
+		GridBagConstraints gbc_numButton1 = new GridBagConstraints();
+		gbc_numButton1.anchor = GridBagConstraints.NORTH;
+		gbc_numButton1.insets = new Insets(0, 0, 5, 5);
+		gbc_numButton1.gridx = 0;
+		gbc_numButton1.gridy = 0;
+		panel.add(numButton1, gbc_numButton1);
 		
-		JButton btnNewButton_1 = new JButton("2");
-		btnNewButton_1.addMouseListener(new MouseAdapter() {
+		JButton numButton2 = new JButton("2");
+		numButton2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent arg0) {
 				rightTextField.setText(rightTextField.getText() + "2");
 			}
 		});
-		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-		gbc_btnNewButton_1.anchor = GridBagConstraints.NORTHWEST;
-		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton_1.gridx = 1;
-		gbc_btnNewButton_1.gridy = 0;
-		panel.add(btnNewButton_1, gbc_btnNewButton_1);
+		GridBagConstraints gbc_numButton2 = new GridBagConstraints();
+		gbc_numButton2.anchor = GridBagConstraints.NORTHWEST;
+		gbc_numButton2.insets = new Insets(0, 0, 5, 5);
+		gbc_numButton2.gridx = 1;
+		gbc_numButton2.gridy = 0;
+		panel.add(numButton2, gbc_numButton2);
 		
-		JButton button = new JButton("3");
-		button.addMouseListener(new MouseAdapter() {
+		JButton numButton3 = new JButton("3");
+		numButton3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				rightTextField.setText(rightTextField.getText() + "3");
 			}
 		});
-		GridBagConstraints gbc_button = new GridBagConstraints();
-		gbc_button.anchor = GridBagConstraints.NORTH;
-		gbc_button.insets = new Insets(0, 0, 5, 0);
-		gbc_button.gridx = 2;
-		gbc_button.gridy = 0;
-		panel.add(button, gbc_button);
+		GridBagConstraints gbc_numButton3 = new GridBagConstraints();
+		gbc_numButton3.anchor = GridBagConstraints.NORTH;
+		gbc_numButton3.insets = new Insets(0, 0, 5, 0);
+		gbc_numButton3.gridx = 2;
+		gbc_numButton3.gridy = 0;
+		panel.add(numButton3, gbc_numButton3);
 		
-		JButton button_1 = new JButton("4");
-		button_1.addMouseListener(new MouseAdapter() {
+		JButton numButton4 = new JButton("4");
+		numButton4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				rightTextField.setText(rightTextField.getText() + "4");
 			}
 		});
-		GridBagConstraints gbc_button_1 = new GridBagConstraints();
-		gbc_button_1.anchor = GridBagConstraints.NORTH;
-		gbc_button_1.insets = new Insets(0, 0, 5, 5);
-		gbc_button_1.gridx = 0;
-		gbc_button_1.gridy = 1;
-		panel.add(button_1, gbc_button_1);
+		GridBagConstraints gbc_numButton4 = new GridBagConstraints();
+		gbc_numButton4.anchor = GridBagConstraints.NORTH;
+		gbc_numButton4.insets = new Insets(0, 0, 5, 5);
+		gbc_numButton4.gridx = 0;
+		gbc_numButton4.gridy = 1;
+		panel.add(numButton4, gbc_numButton4);
 		
-		JButton button_2 = new JButton("5");
-		button_2.addMouseListener(new MouseAdapter() {
+		JButton numButton5 = new JButton("5");
+		numButton5.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				rightTextField.setText(rightTextField.getText() + "5");
 
 			}
 		});
-		GridBagConstraints gbc_button_2 = new GridBagConstraints();
-		gbc_button_2.anchor = GridBagConstraints.NORTHWEST;
-		gbc_button_2.insets = new Insets(0, 0, 5, 5);
-		gbc_button_2.gridx = 1;
-		gbc_button_2.gridy = 1;
-		panel.add(button_2, gbc_button_2);
+		GridBagConstraints gbc_numButton5 = new GridBagConstraints();
+		gbc_numButton5.anchor = GridBagConstraints.NORTHWEST;
+		gbc_numButton5.insets = new Insets(0, 0, 5, 5);
+		gbc_numButton5.gridx = 1;
+		gbc_numButton5.gridy = 1;
+		panel.add(numButton5, gbc_numButton5);
 		
-		JButton button_3 = new JButton("6");
-		button_3.addMouseListener(new MouseAdapter() {
+		JButton numButton6 = new JButton("6");
+		numButton6.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				rightTextField.setText(rightTextField.getText() + "6");
 
 			}
 		});
-		GridBagConstraints gbc_button_3 = new GridBagConstraints();
-		gbc_button_3.anchor = GridBagConstraints.NORTH;
-		gbc_button_3.insets = new Insets(0, 0, 5, 0);
-		gbc_button_3.gridx = 2;
-		gbc_button_3.gridy = 1;
-		panel.add(button_3, gbc_button_3);
+		GridBagConstraints gbc_numButton6 = new GridBagConstraints();
+		gbc_numButton6.anchor = GridBagConstraints.NORTH;
+		gbc_numButton6.insets = new Insets(0, 0, 5, 0);
+		gbc_numButton6.gridx = 2;
+		gbc_numButton6.gridy = 1;
+		panel.add(numButton6, gbc_numButton6);
 		
-		JButton button_4 = new JButton("7");
-		button_4.addMouseListener(new MouseAdapter() {
+		JButton numButton7 = new JButton("7");
+		numButton7.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				rightTextField.setText(rightTextField.getText() + "7");
 
 			}
 		});
-		GridBagConstraints gbc_button_4 = new GridBagConstraints();
-		gbc_button_4.anchor = GridBagConstraints.NORTH;
-		gbc_button_4.insets = new Insets(0, 0, 5, 5);
-		gbc_button_4.gridx = 0;
-		gbc_button_4.gridy = 2;
-		panel.add(button_4, gbc_button_4);
+		GridBagConstraints gbc_numButton7 = new GridBagConstraints();
+		gbc_numButton7.anchor = GridBagConstraints.NORTH;
+		gbc_numButton7.insets = new Insets(0, 0, 5, 5);
+		gbc_numButton7.gridx = 0;
+		gbc_numButton7.gridy = 2;
+		panel.add(numButton7, gbc_numButton7);
 		
-		JButton button_5 = new JButton("8");
-		button_5.addMouseListener(new MouseAdapter() {
+		JButton numButton8 = new JButton("8");
+		numButton8.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				rightTextField.setText(rightTextField.getText() + "8");
 
 			}
 		});
-		GridBagConstraints gbc_button_5 = new GridBagConstraints();
-		gbc_button_5.anchor = GridBagConstraints.NORTHWEST;
-		gbc_button_5.insets = new Insets(0, 0, 5, 5);
-		gbc_button_5.gridx = 1;
-		gbc_button_5.gridy = 2;
-		panel.add(button_5, gbc_button_5);
+		GridBagConstraints gbc_numButton8 = new GridBagConstraints();
+		gbc_numButton8.anchor = GridBagConstraints.NORTHWEST;
+		gbc_numButton8.insets = new Insets(0, 0, 5, 5);
+		gbc_numButton8.gridx = 1;
+		gbc_numButton8.gridy = 2;
+		panel.add(numButton8, gbc_numButton8);
 		
-		JButton button_6 = new JButton("9");
-		button_6.addMouseListener(new MouseAdapter() {
+		JButton numButton9 = new JButton("9");
+		numButton9.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				rightTextField.setText(rightTextField.getText() + "9");
 
 			}
 		});
-		GridBagConstraints gbc_button_6 = new GridBagConstraints();
-		gbc_button_6.anchor = GridBagConstraints.NORTH;
-		gbc_button_6.insets = new Insets(0, 0, 5, 0);
-		gbc_button_6.gridx = 2;
-		gbc_button_6.gridy = 2;
-		panel.add(button_6, gbc_button_6);
+		GridBagConstraints gbc_numButton9 = new GridBagConstraints();
+		gbc_numButton9.anchor = GridBagConstraints.NORTH;
+		gbc_numButton9.insets = new Insets(0, 0, 5, 0);
+		gbc_numButton9.gridx = 2;
+		gbc_numButton9.gridy = 2;
+		panel.add(numButton9, gbc_numButton9);
 		
 		JButton btnClear = new JButton("Clear");
 		btnClear.addMouseListener(new MouseAdapter() {
@@ -334,26 +355,26 @@ public class MainWindow {
 		gbc_btnClear.gridy = 3;
 		panel.add(btnClear, gbc_btnClear);
 		
-		JButton button_7 = new JButton("0");
-		button_7.addMouseListener(new MouseAdapter() {
+		JButton numButton0 = new JButton("0");
+		numButton0.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				rightTextField.setText(rightTextField.getText() + "0");
 
 			}
 		});
-		GridBagConstraints gbc_button_7 = new GridBagConstraints();
-		gbc_button_7.anchor = GridBagConstraints.NORTHWEST;
-		gbc_button_7.insets = new Insets(0, 0, 5, 5);
-		gbc_button_7.gridx = 1;
-		gbc_button_7.gridy = 3;
-		panel.add(button_7, gbc_button_7);
+		GridBagConstraints gbc_numButton0 = new GridBagConstraints();
+		gbc_numButton0.anchor = GridBagConstraints.NORTHWEST;
+		gbc_numButton0.insets = new Insets(0, 0, 5, 5);
+		gbc_numButton0.gridx = 1;
+		gbc_numButton0.gridy = 3;
+		panel.add(numButton0, gbc_numButton0);
 		
 		JButton btnEnter = new JButton("Enter");
 		btnEnter.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				leftTextField.setText(rightTextField.getText() + " Kg");
+				leftTextField.setText(rightTextField.getText());
 				rightTextField.setText("");
 			}
 		});
@@ -385,6 +406,7 @@ public class MainWindow {
 		return brutto - tara;
 	}
 	public void setNetto(double netto) {
+		this.netto = netto;
 		this.brutto = netto + tara;
 	}
 	public double getTara() {

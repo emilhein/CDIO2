@@ -51,7 +51,8 @@ public class MainWindow {
 
 	private double tara = 0;
 	private double netto = 0.000;
-	private double brutto = tara + netto;
+	private double brutto = getTara() + getNetto();
+	private String command = "";
 	
 
 	public MainWindow() {
@@ -60,6 +61,7 @@ public class MainWindow {
 
 	private void initialize() {
 		frame = new JFrame();
+		frame.setResizable(false);
 		frame.setBounds(100, 100, 445, 243);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -168,7 +170,7 @@ public class MainWindow {
 		// has to follow the (bruttolast) field
 		upperTextField = new JTextField();
 		upperTextField.setEditable(false);
-		upperTextField.setText(netto + " Kg");
+		upperTextField.setText(getNetto() + " Kg");
 		upperTextField.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_upperTextField = new GridBagConstraints();
 		gbc_upperTextField.gridwidth = 2;
@@ -188,12 +190,12 @@ public class MainWindow {
 		gbc_leftTextField.gridx = 0;
 		gbc_leftTextField.gridy = 2;
 		panel_1.add(leftTextField, gbc_leftTextField);
-		leftTextField.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		leftTextField.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		leftTextField.setColumns(10);
 		
 		final JTextField rightTextField = new JTextField();
 		rightTextField.setHorizontalAlignment(SwingConstants.RIGHT);
-		rightTextField.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		rightTextField.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GridBagConstraints gbc_rightTextField = new GridBagConstraints();
 		gbc_rightTextField.fill = GridBagConstraints.BOTH;
 		gbc_rightTextField.gridx = 1;
@@ -345,7 +347,14 @@ public class MainWindow {
 		btnClear.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
+				setBrutto(0);
+				setTara(0);
+				setNetto(0);
+				upperTextField.setText(getNetto() + " Kg");
 				leftTextField.setText("");
+				rightTextField.setText("");
+				bruttoField.setText("" + getBrutto());
+				
 			}
 		});
 		GridBagConstraints gbc_btnClear = new GridBagConstraints();
@@ -374,7 +383,8 @@ public class MainWindow {
 		btnEnter.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				leftTextField.setText(rightTextField.getText());
+				setCommand(rightTextField.getText());
+				leftTextField.setText(getCommand());
 				rightTextField.setText("");
 			}
 		});
@@ -423,9 +433,15 @@ public class MainWindow {
 		//# TODO: Fjern meddelsen fra displayet og vend tilbage til visning af netto vægt.
 		leftTextField.setText("");
 	}
+	public String getCommand(){
+		return command;
+	}
+	public void setCommand(String command){
+		this.command = command;
+	}
 	public String prompt(String firstMessage, String secondMessage, String thirdMessage) {
 		leftTextField.setText(firstMessage + " " + secondMessage + " " + thirdMessage);
-		return ""; //# TODO: Vis tre meddelser på displayet og retuner den indtastede værdi.
+		return getCommand(); //# TODO: Vis tre meddelser på displayet og retuner den indtastede værdi.
 	}
 	
 }

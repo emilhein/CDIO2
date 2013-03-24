@@ -47,7 +47,7 @@ public class MainWindow {
 	private JTextField bruttoField;
 	private JTextField upperTextField;
 
-	private double brutto = 0;
+	private double brutto = 0.000;
 	private double tara = 0;
 
 	public MainWindow() {
@@ -69,19 +69,15 @@ public class MainWindow {
 		bruttoField.setForeground(new Color(0, 0, 0));
 		bruttoField.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		bruttoField.setEditable(false);
-		bruttoField.setText("0.000");
+		bruttoField.setText("" + brutto);
 		bruttoField.setColumns(10);
 		
 		JButton BruttoUp = new JButton("");
 		BruttoUp.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {				
-				
-				
-//				float brutto = Float.parseFloat(bruttoField.getText());
-//				brutto = (float) (brutto + 0.1);
-//				brutto = b
-//				bruttoField.setText(brutto + "");
+				brutto = brutto + 1;
+				bruttoField.setText("" + brutto);
 			}
 		});
 		BruttoUp.setIcon(new ImageIcon(MainWindow.class.getResource("/javax/swing/plaf/metal/icons/sortUp.png")));
@@ -91,18 +87,15 @@ public class MainWindow {
 		BruttoDown.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				BigDecimal decimal = new BigDecimal(bruttoField.getText());
-				bruttoField.setText("" + decimal.add(new BigDecimal(-0.1)));
-//				float brutto = Float.parseFloat(bruttoField.getText());
-//				brutto = (float) (brutto - 0.1);
-//				bruttoField.setText(brutto + "");
+				brutto = brutto - 1;
+				bruttoField.setText("" + brutto);
 			}
 		});
 		BruttoDown.setIcon(new ImageIcon(MainWindow.class.getResource("/javax/swing/plaf/metal/icons/sortDown.png")));
 		
 		JPanel panel_1 = new JPanel();
 		
-		JLabel bruttoLabel = new JLabel("Kg (bruttolast)");
+		JLabel bruttoLabel = new JLabel("Kg Bruttov\u00E6gt");
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
@@ -177,7 +170,9 @@ public class MainWindow {
 		leftTextField.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		leftTextField.setColumns(10);
 		
-		JFormattedTextField rightTextField = new JFormattedTextField();
+		final JTextField rightTextField = new JTextField();
+		rightTextField.setHorizontalAlignment(SwingConstants.RIGHT);
+		rightTextField.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_rightTextField = new GridBagConstraints();
 		gbc_rightTextField.fill = GridBagConstraints.BOTH;
 		gbc_rightTextField.gridx = 1;
@@ -189,12 +184,16 @@ public class MainWindow {
 		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0};
 		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0};
 		panel.setLayout(gbl_panel);
+
+// ===========================
+// buttons begin
+// ===========================
 		
 		JButton btnNewButton = new JButton("1");
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent arg0) {
-				leftTextField.setText(leftTextField.getText() + "1");
+				rightTextField.setText(rightTextField.getText() + "1");
 			}
 		});
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
@@ -208,7 +207,7 @@ public class MainWindow {
 		btnNewButton_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent arg0) {
-				leftTextField.setText(leftTextField.getText() + "2");
+				rightTextField.setText(rightTextField.getText() + "2");
 			}
 		});
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
@@ -222,7 +221,7 @@ public class MainWindow {
 		button.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				leftTextField.setText(leftTextField.getText() + "3");
+				rightTextField.setText(rightTextField.getText() + "3");
 			}
 		});
 		GridBagConstraints gbc_button = new GridBagConstraints();
@@ -236,7 +235,7 @@ public class MainWindow {
 		button_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				leftTextField.setText(leftTextField.getText() + "4");
+				rightTextField.setText(rightTextField.getText() + "4");
 			}
 		});
 		GridBagConstraints gbc_button_1 = new GridBagConstraints();
@@ -250,7 +249,7 @@ public class MainWindow {
 		button_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				leftTextField.setText(leftTextField.getText() + "5");
+				rightTextField.setText(rightTextField.getText() + "5");
 
 			}
 		});
@@ -265,7 +264,7 @@ public class MainWindow {
 		button_3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				leftTextField.setText(leftTextField.getText() + "6");
+				rightTextField.setText(rightTextField.getText() + "6");
 
 			}
 		});
@@ -280,7 +279,7 @@ public class MainWindow {
 		button_4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				leftTextField.setText(leftTextField.getText() + "7");
+				rightTextField.setText(rightTextField.getText() + "7");
 
 			}
 		});
@@ -295,7 +294,7 @@ public class MainWindow {
 		button_5.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				leftTextField.setText(leftTextField.getText() + "8");
+				rightTextField.setText(rightTextField.getText() + "8");
 
 			}
 		});
@@ -310,7 +309,7 @@ public class MainWindow {
 		button_6.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				leftTextField.setText(leftTextField.getText() + "9");
+				rightTextField.setText(rightTextField.getText() + "9");
 
 			}
 		});
@@ -339,7 +338,7 @@ public class MainWindow {
 		button_7.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				leftTextField.setText(leftTextField.getText() + "0");
+				rightTextField.setText(rightTextField.getText() + "0");
 
 			}
 		});
@@ -351,6 +350,13 @@ public class MainWindow {
 		panel.add(button_7, gbc_button_7);
 		
 		JButton btnEnter = new JButton("Enter");
+		btnEnter.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				leftTextField.setText(rightTextField.getText() + " Kg");
+				rightTextField.setText("");
+			}
+		});
 		GridBagConstraints gbc_btnEnter = new GridBagConstraints();
 		gbc_btnEnter.insets = new Insets(0, 0, 5, 0);
 		gbc_btnEnter.anchor = GridBagConstraints.NORTHWEST;
@@ -359,6 +365,10 @@ public class MainWindow {
 		panel.add(btnEnter, gbc_btnEnter);
 		frame.getContentPane().setLayout(groupLayout);
 	}
+	
+// ==========================
+// buttons end
+// ==========================
 
 	public void show() {
 		MainWindow window = new MainWindow();
@@ -385,11 +395,14 @@ public class MainWindow {
 	}
 	public void display(String message) {
 		//# TODO: Vis meddelse på displayet.
+		leftTextField.setText(message);
 	}
 	public void clearDisplay() {
 		//# TODO: Fjern meddelsen fra displayet og vend tilbage til visning af netto vægt.
+		leftTextField.setText("");
 	}
 	public String prompt(String firstMessage, String secondMessage, String thirdMessage) {
+		leftTextField.setText(firstMessage + " " + secondMessage + " " + thirdMessage);
 		return ""; //# TODO: Vis tre meddelser på displayet og retuner den indtastede værdi.
 	}
 	
